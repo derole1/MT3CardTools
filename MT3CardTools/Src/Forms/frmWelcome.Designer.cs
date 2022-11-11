@@ -35,6 +35,8 @@ namespace MT3CardTools.Src.Forms
             this.btnOk = new System.Windows.Forms.Button();
             this.lblParagraph2 = new System.Windows.Forms.Label();
             this.pnlMainContent = new System.Windows.Forms.Panel();
+            this.lblLicenseUrl = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlMainContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,14 +57,14 @@ namespace MT3CardTools.Src.Forms
             this.lblParagraph1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblParagraph1.Location = new System.Drawing.Point(0, 0);
             this.lblParagraph1.Name = "lblParagraph1";
-            this.lblParagraph1.Size = new System.Drawing.Size(846, 329);
+            this.lblParagraph1.Size = new System.Drawing.Size(880, 329);
             this.lblParagraph1.TabIndex = 1;
             this.lblParagraph1.Text = resources.GetString("lblParagraph1.Text");
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(783, 424);
+            this.btnOk.Location = new System.Drawing.Point(783, 381);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 2;
@@ -72,14 +74,13 @@ namespace MT3CardTools.Src.Forms
             // 
             // lblParagraph2
             // 
-            this.lblParagraph2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblParagraph2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblParagraph2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParagraph2.Location = new System.Drawing.Point(12, 375);
+            this.lblParagraph2.Location = new System.Drawing.Point(12, 381);
             this.lblParagraph2.Name = "lblParagraph2";
-            this.lblParagraph2.Size = new System.Drawing.Size(765, 78);
+            this.lblParagraph2.Size = new System.Drawing.Size(144, 13);
             this.lblParagraph2.TabIndex = 3;
-            this.lblParagraph2.Text = resources.GetString("lblParagraph2.Text");
+            this.lblParagraph2.Text = "This work is licensed under a";
             this.lblParagraph2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // pnlMainContent
@@ -91,14 +92,41 @@ namespace MT3CardTools.Src.Forms
             this.pnlMainContent.Controls.Add(this.lblParagraph1);
             this.pnlMainContent.Location = new System.Drawing.Point(12, 43);
             this.pnlMainContent.Name = "pnlMainContent";
-            this.pnlMainContent.Size = new System.Drawing.Size(846, 329);
+            this.pnlMainContent.Size = new System.Drawing.Size(846, 332);
             this.pnlMainContent.TabIndex = 4;
+            // 
+            // lblLicenseUrl
+            // 
+            this.lblLicenseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLicenseUrl.Location = new System.Drawing.Point(152, 381);
+            this.lblLicenseUrl.Name = "lblLicenseUrl";
+            this.lblLicenseUrl.Size = new System.Drawing.Size(625, 12);
+            this.lblLicenseUrl.TabIndex = 5;
+            this.lblLicenseUrl.TabStop = true;
+            this.lblLicenseUrl.Text = "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License";
+            this.lblLicenseUrl.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblLicenseUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLicenseUrl_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 394);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(762, 14);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "By continuing to use or otherwise alter or modify this software you agree to the " +
+    "above license.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmWelcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 459);
+            this.ClientSize = new System.Drawing.Size(870, 416);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLicenseUrl);
             this.Controls.Add(this.pnlMainContent);
             this.Controls.Add(this.lblParagraph2);
             this.Controls.Add(this.btnOk);
@@ -123,5 +151,7 @@ namespace MT3CardTools.Src.Forms
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label lblParagraph2;
         private System.Windows.Forms.Panel pnlMainContent;
+        private System.Windows.Forms.LinkLabel lblLicenseUrl;
+        private System.Windows.Forms.Label label1;
     }
 }

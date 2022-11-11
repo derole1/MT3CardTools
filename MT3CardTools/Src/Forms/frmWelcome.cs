@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace MT3CardTools.Src.Forms
 {
@@ -25,6 +26,11 @@ namespace MT3CardTools.Src.Forms
                 Properties.Settings.Default.Save();
             }
             Close();
+        }
+
+        private void lblLicenseUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://creativecommons.org/licenses/by-nc-sa/4.0/");
         }
     }
 }

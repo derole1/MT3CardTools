@@ -139,8 +139,4 @@ Options:
     Reset all options to defaults - Resets all options to their default values
     Open welcome message - View this message again at any time</value>
   </data>
-  <data name="lblParagraph2.Text" xml:space="preserve">
-    <value>This software is designed for personal use only. Commercial use is strictly prohibited. By continuing to use this software, you agree to all the listed conditions and that you will not use this software or any of its features for any form of monetary gain. If you paid for this software, ask for a refund immediately.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</value>
-  </data>
 </root>
