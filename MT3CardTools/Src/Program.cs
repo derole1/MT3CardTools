@@ -35,8 +35,12 @@ namespace MT3CardTools.Src
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Log.Info($"Main: argc:{args.Length},argv:{string.Join(" ", args)}");
-            if (args.Length < 2)
+            if (args.Length < 2 || args[1] == "-log")
+            {
+                if (args[1] == "-log")
+                    Log.LogToFile = true;
                 Application.Run(new frmMain());
+            }
             else
             {
                 List<Form> forms = new List<Form>();

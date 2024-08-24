@@ -63,5 +63,8 @@
     <Setting Name="CardEditor_HideUnsupportedCarsWarning" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="UseStackFramesInDebugLog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
