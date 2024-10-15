@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 
 using MT3CardTools.Src.CardTools.ReaderNew.Models;
+using System.Threading;
 
 namespace MT3CardTools.Src.CardTools.ReaderNew
 {
@@ -16,13 +17,19 @@ namespace MT3CardTools.Src.CardTools.ReaderNew
         public bool IsOpen => Port.IsOpen;
         public IResponse LastResponse { get; protected set; }
 
+        private CancellationToken? _cancelToken;
+
         public ReaderConnection(string port, SerialConnection.EPortType portType, int baudRate = 38400, Parity parity = Parity.Even)
         {
             Port = new SerialConnection(port, portType);
             Port.SetCOMParameters(baudRate, parity);
         }
 
-        public async Task Open() => await Port.OpenAsync();
+        public async Task Open(CancellationToken? cancelToken = null)
+        {
+            _cancelToken = cancelToken;
+            await Port.OpenAsync();
+        }
 
         public async Task<Init.Response> Init(bool arg0, bool arg1)
         {

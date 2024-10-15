@@ -137,7 +137,7 @@ namespace MT3CardTools.Src.Forms
             this.Name = "frmWelcome";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gao Gao! Welcome to MT3 Card Tools!";
+            this.Text = "Welcome to MT3 Card Tools!";
             this.pnlMainContent.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

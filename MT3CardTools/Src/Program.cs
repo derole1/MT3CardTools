@@ -4,17 +4,23 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 using MT3CardTools.Src.CardTools;
 using MT3CardTools.Src.Forms;
 using MT3CardTools.Src.Interface;
 using MT3CardTools.Src.Helpers;
 using MT3CardTools.Src.Logging;
+using System.Runtime.InteropServices;
 
 namespace MT3CardTools.Src
 {
     static class Program
     {
+        [DllImport("kernel32.dll")]
+        static extern bool AttachConsole(int dwProcessId);
+        private const int ATTACH_PARENT_PROCESS = -1;
+
         const string message = "I like pancakes";
 
         static string[] args = Environment.GetCommandLineArgs();
@@ -35,10 +41,12 @@ namespace MT3CardTools.Src
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Log.Info($"Main: argc:{args.Length},argv:{string.Join(" ", args)}");
-            if (args.Length < 2 || args[1] == "-log")
+            if (args.Length < 2 || args[1] == "-log" || args[1] == "-console")
             {
                 if (args[1] == "-log")
                     Log.LogToFile = true;
+                if (args[1] == "-console" && !Debugger.IsAttached)
+                    Log.Warn("Main: -console unimplemented!");  // TODO
                 Application.Run(new frmMain());
             }
             else
@@ -55,7 +63,7 @@ namespace MT3CardTools.Src
                         if (args[i] == "-keyextract")
                             forms.Add(new frmKeyExtractor());
                     }
-                    else
+                    else if (File.Exists(args[i]))
                         forms.Add(CardWindows.CreateCardWindow(args[i]));
                 }
                 Application.Run(new MultiFormContext(forms.ToArray()));
@@ -66,10 +74,10 @@ namespace MT3CardTools.Src
         {
             Log.Error($"HandleException: {e.Message}");
             if (Msg.Error("An error occured and the application will have to close.\nWould you like to see more details?"
-                , MessageBoxButtons.YesNo, "Im in a pinch!") == DialogResult.Yes)
-                Msg.Exception(e, "Im in a double pinch!");
+                , MessageBoxButtons.YesNo, "An error occured!") == DialogResult.Yes)
+                Msg.Exception(e, "Error report");
             if (Msg.Question("Would you like to attempt to continue?\nProgram stability is not guarenteed beyond this point. You should save and restart the program as soon as possible."
-                , MessageBoxButtons.YesNo, "Im in a triple pinch!") == DialogResult.No)
+                , MessageBoxButtons.YesNo, "Continue execution?") == DialogResult.No)
                 Environment.Exit(-1);
         }
 

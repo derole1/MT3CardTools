@@ -9,6 +9,7 @@ using System.IO.Pipes;
 
 using MT3CardTools.Src.Helpers;
 using MT3CardTools.Src.Logging;
+using System.Threading;
 
 namespace MT3CardTools.Src.CardTools.ReaderNew
 {
@@ -95,29 +96,35 @@ namespace MT3CardTools.Src.CardTools.ReaderNew
         }
         public void ReadAck() => ReadAckAsync().GetAwaiter().GetResult();
 
-        public async Task<byte[]> ReadDataAsync()
+        public async Task<byte[]> ReadDataAsync(CancellationToken? cToken = null)
         {
             if (!IsOpen)
                 return null;
-            var mark = await ReadByteAsync();
-            if (mark == 0xFF)
+            var mark = await ReadByteAsync(cToken);
+            if (mark == null || mark == 0xFF)
                 return null;
             else if (mark != ReaderConstants.STX)
-                return await ReadDataAsync();   //Could this cause a stack overflow?
+                return await ReadDataAsync(cToken);   //Could this cause a stack overflow?
 
-            var payloadSize = await ReadByteAsync();
+            var payloadSize = await ReadByteAsync(cToken);
+            if (payloadSize == null)
+                return null;
             Log.Debug($"ReadData: Got STX! Payload size: {payloadSize}");
             using (var ms = new MemoryStream())
             {
                 for (int i=0; i<payloadSize; i++)
                 {
-                    var b = await ReadByteAsync();
+                    var b = await ReadByteAsync(cToken);
+                    if (b == null)
+                        return null;
                     if (i == payloadSize - 2 && b == ReaderConstants.ETX)
                     {
-                        var checksum = await ReadByteAsync();
+                        var checksum = await ReadByteAsync(cToken);
+                        if (checksum == null)
+                            return null;
                         ms.Flush();
                         var data = ms.ToArray();
-                        var calcSum = ReaderConstants.Checksum(data.Concat(new byte[] { b }).ToArray(), payloadSize);
+                        var calcSum = ReaderConstants.Checksum(data.Concat(new byte[] { (byte)b }).ToArray(), (byte)payloadSize);
                         if (checksum != calcSum)
                         {
                             Log.Error($"ReadData: Checksum error! Expected:{calcSum},Got:{checksum}");
@@ -126,45 +133,45 @@ namespace MT3CardTools.Src.CardTools.ReaderNew
                         Log.Info($"ReadData: Read {payloadSize + 2} bytes!");
                         return data;
                     }
-                    ms.WriteByte(b);
+                    ms.WriteByte((byte)b);
                 }
                 Log.Error($"ReadData: Reached end of payload but have not encountered an ETX?");
                 return null;
             }
         }
-        public byte[] ReadData() => ReadDataAsync().GetAwaiter().GetResult();
+        public byte[] ReadData(CancellationToken? cToken = null) => ReadDataAsync(cToken).GetAwaiter().GetResult();
 
-        public async Task WriteEnqAsync()
+        public async Task WriteEnqAsync(CancellationToken? cToken = null)
         {
             if (!IsOpen)
                 return;
-            await WriteByteAsync(ReaderConstants.ENQ);
+            await WriteByteAsync(ReaderConstants.ENQ, cToken);
             Log.Info($"WriteEnq: Done!");
         }
         public void WriteEnq() => WriteEnqAsync().GetAwaiter().GetResult();
 
-        public async Task WriteDataAsync(byte[] data)
+        public async Task WriteDataAsync(byte[] data, CancellationToken? cToken = null)
         {
             data = data.Concat(new byte[] { ReaderConstants.ETX }).ToArray();
             var len = data.Length + 1;
-            await WriteByteAsync(ReaderConstants.STX);
-            await WriteByteAsync((byte)len);
-            await WriteAsync(data);
-            await WriteByteAsync(ReaderConstants.Checksum(data, (byte)len));
+            await WriteByteAsync(ReaderConstants.STX, cToken);
+            await WriteByteAsync((byte)len, cToken);
+            await WriteAsync(data, cToken);
+            await WriteByteAsync(ReaderConstants.Checksum(data, (byte)len), cToken);
             Log.Info($"WriteData: Wrote {len + 2} bytes!");
         }
         public void WriteData(byte[] data) => WriteDataAsync(data).GetAwaiter().GetResult();
 
-        private async Task<byte> ReadByteAsync() =>
-            PortType == EPortType.COM ? await Port.ReadByteAsync() : await Pipe.ReadByteAsync();
-        private async Task WriteAsync(byte[] b)
+        private async Task<byte?> ReadByteAsync(CancellationToken? cToken = null) =>
+            PortType == EPortType.COM ? await Port.ReadByteAsync(cToken) : await Pipe.ReadByteAsync(cToken);
+        private async Task WriteAsync(byte[] b, CancellationToken? cToken = null)
         {
             if (PortType == EPortType.COM)
-                await Port.WriteAsync(b);
+                await Port.WriteAsync(b, cToken);
             else
-                await Pipe.WriteAsync(b);
+                await Pipe.WriteAsync(b, cToken);
         }
-        private async Task WriteByteAsync(byte b) => await WriteAsync(new byte[] { b });
+        private async Task WriteByteAsync(byte b, CancellationToken? cToken = null) => await WriteAsync(new byte[] { b }, cToken);
 
         public void Close()
         {

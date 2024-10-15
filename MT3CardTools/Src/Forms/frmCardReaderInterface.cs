@@ -15,6 +15,7 @@ using MT3CardTools.Src.CardTools;
 using MT3CardTools.Src.CardTools.ReaderNew;
 using MT3CardTools.Src.CardTools.ReaderNew.Models;
 using MT3CardTools.Src.Helpers;
+using System.Threading;
 
 namespace MT3CardTools.Src.Forms
 {
@@ -33,6 +34,7 @@ namespace MT3CardTools.Src.Forms
 
         private ReaderConnection Reader { get; set; }
         private frmCardReaderInterfaceWait WaitMessage { get; set; }
+        private CancellationTokenSource CancellationTokenSource { get; set; }
 
         private GetVersion.Response ReaderVersion { get; set; }
 
@@ -48,6 +50,7 @@ namespace MT3CardTools.Src.Forms
             WaitMessage = new frmCardReaderInterfaceWait();
             WaitMessage.ParentWindow = this;
             WaitMessage.MdiParent = ParentForm;
+            CancellationTokenSource = new CancellationTokenSource();
             BringToFront();
         }
 
@@ -59,7 +62,7 @@ namespace MT3CardTools.Src.Forms
             {
                 Reader = new ReaderConnection(portName, Properties.Settings.Default.CardReader_UsePipes ? SerialConnection.EPortType.Pipe : SerialConnection.EPortType.COM
                     , Properties.Settings.Default.CardReader_BaudRate, (Parity)Properties.Settings.Default.CardReader_Parity);
-                await Reader.Open();
+                await Reader.Open(CancellationTokenSource.Token);
             START:
                 if (Reader.IsOpen)
                 {

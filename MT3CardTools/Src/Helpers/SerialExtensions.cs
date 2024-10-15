@@ -9,6 +9,7 @@ using System.IO.Pipes;
 
 //using MT3CardTools.Src.CardTools.Reader;
 using MT3CardTools.Src.Logging;
+using System.Threading;
 
 namespace MT3CardTools.Src.Helpers
 {
@@ -47,13 +48,17 @@ namespace MT3CardTools.Src.Helpers
         //    }
         //}
 
-        public async static Task<byte> ReadByteAsync(this SerialPort serialPort)
+        public async static Task<byte?> ReadByteAsync(this SerialPort serialPort, CancellationToken? cToken = null)
         {
             try
             {
+                var read = 0;
                 var buf = new byte[1];
-                await serialPort.BaseStream.ReadAsync(buf, 0, buf.Length);
-                return buf[0];
+                if (cToken != null)
+                    read = await serialPort.BaseStream.ReadAsync(buf, 0, buf.Length, (CancellationToken)cToken);
+                else
+                    read = await serialPort.BaseStream.ReadAsync(buf, 0, buf.Length);
+                return read < 1 ? null : (byte?)buf[0];
             }
             catch
             {
@@ -62,13 +67,17 @@ namespace MT3CardTools.Src.Helpers
             }
         }
 
-        public async static Task<byte> ReadByteAsync(this NamedPipeClientStream serialPort)
+        public async static Task<byte?> ReadByteAsync(this NamedPipeClientStream serialPort, CancellationToken? cToken = null)
         {
             try
             {
+                var read = 0;
                 var buf = new byte[1];
-                await serialPort.ReadAsync(buf, 0, buf.Length);
-                return buf[0];
+                if (cToken != null)
+                    read = await serialPort.ReadAsync(buf, 0, buf.Length, (CancellationToken)cToken);
+                else
+                    read = await serialPort.ReadAsync(buf, 0, buf.Length);
+                return read < 1 ? null : (byte?)buf[0];
             }
             catch
             {
@@ -106,13 +115,13 @@ namespace MT3CardTools.Src.Helpers
             return buffer;
         }
 
-        public async static Task WriteAsync(this SerialPort serialPort, byte[] buffer, int offset, int count)
+        public async static Task WriteAsync(this SerialPort serialPort, byte[] buffer, int offset, int count, CancellationToken? cToken = null)
         {
             try
             {
                 Log.Debug($"WDATA: {BitConverter.ToString(buffer).Replace("-", " ")}");
 
-                await Task.Run(() => serialPort.Write(buffer, offset, count));
+                await Task.Run(() => serialPort.Write(buffer, offset, count), (CancellationToken)cToken);
             }
             catch
             {
@@ -120,18 +129,18 @@ namespace MT3CardTools.Src.Helpers
             }
         }
 
-        public async static Task WriteAsync(this SerialPort serialPort, byte[] buffer)
+        public async static Task WriteAsync(this SerialPort serialPort, byte[] buffer, CancellationToken? cToken = null)
         {
-            await serialPort.WriteAsync(buffer, 0, buffer.Length);
+            await serialPort.WriteAsync(buffer, 0, buffer.Length, cToken);
         }
 
-        public async static Task WriteAsync(this NamedPipeClientStream serialPort, byte[] buffer)
+        public async static Task WriteAsync(this NamedPipeClientStream serialPort, byte[] buffer, CancellationToken? cToken = null)
         {
             try
             {
                 Log.Debug($"WDATA: {BitConverter.ToString(buffer).Replace("-", " ")}");
 
-                await serialPort.WriteAsync(buffer, 0, buffer.Length);
+                await serialPort.WriteAsync(buffer, 0, buffer.Length, (CancellationToken)cToken);
             }
             catch
             {

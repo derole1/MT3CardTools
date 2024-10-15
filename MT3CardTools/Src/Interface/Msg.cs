@@ -4,23 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MT3CardTools.Src.Logging;
 
 namespace MT3CardTools.Src.Interface
 {
     class Msg
     {
         public static DialogResult Default(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "")
-            => MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.None);
+        {
+            Log.Info($"Msg::Default: {title}: {message}");
+            return MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.None);
+        }
         public static DialogResult Info(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "")
-            => MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Information);
+        {
+            Log.Info($"Msg::Info: {title}: {message}");
+            return MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Information);
+        }
         public static DialogResult Warning(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "")
-            => MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Warning);
-        public static DialogResult Error(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "Gao...")
-            => MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Error);
-        public static DialogResult Question(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "Gao?")
-            => MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Question);
+        {
+            Log.Warn($"Msg::Warning: {title}: {message}");
+            return MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Warning);
+        }
+        public static DialogResult Error(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "")
+        {
+            Log.Error($"Msg::Error: {title}: {message}");
+            return MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Error);
+        }
+        public static DialogResult Question(object message, MessageBoxButtons buttons = MessageBoxButtons.OK, string title = "")
+        {
+            Log.Info($"Msg::Question: {title}: {message}");
+            return MessageBox.Show(message.ToString(), title, buttons, MessageBoxIcon.Question);
+        }
 
-        public static DialogResult Exception(Exception e, string title = "Im in a pinch!")
+        public static DialogResult Exception(Exception e, string title = "Error report")
         {
             var frm = new Form
             {
