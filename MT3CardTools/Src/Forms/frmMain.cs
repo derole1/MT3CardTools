@@ -134,7 +134,8 @@ namespace MT3CardTools.Src.Forms
             //    $"NOT FOR RELEASE!"
             //    );
             var frm = new frmAbout();
-            frm.ShowDialog();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e) => Close();
@@ -512,6 +513,35 @@ namespace MT3CardTools.Src.Forms
         {
             Properties.Settings.Default.CardEditor_HideUnsupportedCarsWarning = chkHideUnsupportedCarsWarning.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void cardIDChangerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var srcDlg = new OpenFileDialog())
+            {
+                srcDlg.Title = "Load source card file";
+                srcDlg.Filter = CardFile.GetFileDialogFilter();
+                srcDlg.Multiselect = false;
+                if (srcDlg.ShowDialog() == DialogResult.OK)
+                {
+                    var version = Card.PeekVersion(srcDlg.FileName);
+                    if (version == 0)
+                    {
+                        Msg.Error("Either the card file doesnt exist, or is in use. Please close any applications with this card open.");
+                        return;
+                    }
+                    if (Enum.IsDefined(typeof(Card.EVersion), version) &&
+                        version != Card.EVersion.v307 && version != Card.EVersion.v322_EXP &&
+                        version != Card.EVersion.v322_JPN)
+                    {
+                        var frm = new frmCardIDChanger(srcDlg.FileName);
+                        frm.MdiParent = this;
+                        frm.Show();
+                        return;
+                    }
+                    Msg.Error($"Source card version {version} is not valid! Aborting");
+                }
+            }
         }
     }
 }

@@ -117,27 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblParagraph1.Text" xml:space="preserve">
-    <value>This seems to be your first time using me! As such I will give a brief introduction on how to use the card editors features.
-
-File:
-    Open card - Open a MT3/3DX/3DX+ card in a card editor
-    Recent cards - Open a recently opened card
-    About - View program version and credits
-    Exit - Close the application
-
-Tools:
-    Encryption key extractor - Extract encryption keys required to decode and encode cards from the game
-    Card file converter - Convert card dumps for MT3/3DX/3DX+ between various dump formats
-    Card generator - Generate a new MT3/3DX/3DX+ card
-    Card ID changer - Changes the card ID of an MT3/3DX/3DX+ card so it appears as a new card
-    Card reader interface - Interface with a real card reader over a serial connection
-
-Options:
-    Main window - Customise the main window, such as by changing the background
-    Card reader interface - Change how the program communicates with a physical reader
-    Card editor - Change the behaviour of the card editor
-    Reset all options to defaults - Resets all options to their default values
-    Open welcome message - View this message again at any time</value>
-  </data>
 </root>

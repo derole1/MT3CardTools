@@ -57,14 +57,14 @@ namespace MT3CardTools.Src.Forms
             this.lblParagraph1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblParagraph1.Location = new System.Drawing.Point(0, 0);
             this.lblParagraph1.Name = "lblParagraph1";
-            this.lblParagraph1.Size = new System.Drawing.Size(880, 329);
+            this.lblParagraph1.Size = new System.Drawing.Size(846, 340);
             this.lblParagraph1.TabIndex = 1;
             this.lblParagraph1.Text = resources.GetString("lblParagraph1.Text");
             // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(783, 381);
+            this.btnOk.Location = new System.Drawing.Point(783, 389);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 2;
@@ -76,7 +76,7 @@ namespace MT3CardTools.Src.Forms
             // 
             this.lblParagraph2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblParagraph2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblParagraph2.Location = new System.Drawing.Point(12, 381);
+            this.lblParagraph2.Location = new System.Drawing.Point(12, 389);
             this.lblParagraph2.Name = "lblParagraph2";
             this.lblParagraph2.Size = new System.Drawing.Size(144, 13);
             this.lblParagraph2.TabIndex = 3;
@@ -92,14 +92,14 @@ namespace MT3CardTools.Src.Forms
             this.pnlMainContent.Controls.Add(this.lblParagraph1);
             this.pnlMainContent.Location = new System.Drawing.Point(12, 43);
             this.pnlMainContent.Name = "pnlMainContent";
-            this.pnlMainContent.Size = new System.Drawing.Size(846, 332);
+            this.pnlMainContent.Size = new System.Drawing.Size(846, 340);
             this.pnlMainContent.TabIndex = 4;
             // 
             // lblLicenseUrl
             // 
             this.lblLicenseUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLicenseUrl.Location = new System.Drawing.Point(152, 381);
+            this.lblLicenseUrl.Location = new System.Drawing.Point(152, 389);
             this.lblLicenseUrl.Name = "lblLicenseUrl";
             this.lblLicenseUrl.Size = new System.Drawing.Size(625, 12);
             this.lblLicenseUrl.TabIndex = 5;
@@ -112,7 +112,7 @@ namespace MT3CardTools.Src.Forms
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 394);
+            this.label1.Location = new System.Drawing.Point(12, 402);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(762, 14);
             this.label1.TabIndex = 6;
@@ -124,7 +124,7 @@ namespace MT3CardTools.Src.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 416);
+            this.ClientSize = new System.Drawing.Size(870, 424);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblLicenseUrl);
             this.Controls.Add(this.pnlMainContent);

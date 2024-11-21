@@ -65,13 +65,15 @@ namespace MT3CardTools.Src.Forms
             this.radTrackSplit = new System.Windows.Forms.ToolStripMenuItem();
             this.radSingle = new System.Windows.Forms.ToolStripMenuItem();
             this.chkAddAllFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkHideUnsupportedCarsWarning = new System.Windows.Forms.ToolStripMenuItem();
             this.sepOptions1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnResetAllOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.sepOptions2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnOpenWelcomeMessage = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxRightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnCloseAllWindows = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkHideUnsupportedCarsWarning = new System.Windows.Forms.ToolStripMenuItem();
+            this.sepTools1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cardIDChangerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.ctxRightClickMenu.SuspendLayout();
             this.SuspendLayout();
@@ -105,37 +107,37 @@ namespace MT3CardTools.Src.Forms
             // btnOpenCard
             // 
             this.btnOpenCard.Name = "btnOpenCard";
-            this.btnOpenCard.Size = new System.Drawing.Size(141, 22);
+            this.btnOpenCard.Size = new System.Drawing.Size(180, 22);
             this.btnOpenCard.Text = "Open card";
             this.btnOpenCard.Click += new System.EventHandler(this.btnOpenCard_Click);
             // 
             // sepFile1
             // 
             this.sepFile1.Name = "sepFile1";
-            this.sepFile1.Size = new System.Drawing.Size(138, 6);
+            this.sepFile1.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuRecentCards
             // 
             this.mnuRecentCards.Name = "mnuRecentCards";
-            this.mnuRecentCards.Size = new System.Drawing.Size(141, 22);
+            this.mnuRecentCards.Size = new System.Drawing.Size(180, 22);
             this.mnuRecentCards.Text = "Recent cards";
             // 
             // sepFile2
             // 
             this.sepFile2.Name = "sepFile2";
-            this.sepFile2.Size = new System.Drawing.Size(138, 6);
+            this.sepFile2.Size = new System.Drawing.Size(177, 6);
             // 
             // btnAbout
             // 
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(141, 22);
+            this.btnAbout.Size = new System.Drawing.Size(180, 22);
             this.btnAbout.Text = "About";
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // btnExit
             // 
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(141, 22);
+            this.btnExit.Size = new System.Drawing.Size(180, 22);
             this.btnExit.Text = "Exit";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -143,10 +145,12 @@ namespace MT3CardTools.Src.Forms
             // 
             this.mnuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnEncryptionKeyExtractor,
-            this.btnCardGenerator,
-            this.btnCardReaderInterface,
+            this.sepTools1,
             this.btnCardFileConverter,
-            this.btnCardImageGenerator});
+            this.btnCardGenerator,
+            this.btnCardImageGenerator,
+            this.cardIDChangerToolStripMenuItem,
+            this.btnCardReaderInterface});
             this.mnuTools.Name = "mnuTools";
             this.mnuTools.Size = new System.Drawing.Size(46, 20);
             this.mnuTools.Text = "Tools";
@@ -360,6 +364,14 @@ namespace MT3CardTools.Src.Forms
             this.chkAddAllFiles.Text = "Add \"All Files\" file type";
             this.chkAddAllFiles.Click += new System.EventHandler(this.chkAddAllFiles_Click);
             // 
+            // chkHideUnsupportedCarsWarning
+            // 
+            this.chkHideUnsupportedCarsWarning.CheckOnClick = true;
+            this.chkHideUnsupportedCarsWarning.Name = "chkHideUnsupportedCarsWarning";
+            this.chkHideUnsupportedCarsWarning.Size = new System.Drawing.Size(258, 22);
+            this.chkHideUnsupportedCarsWarning.Text = "Hide warning for unsupported cars";
+            this.chkHideUnsupportedCarsWarning.Click += new System.EventHandler(this.chkUnsupportedCarsWarning_Click);
+            // 
             // sepOptions1
             // 
             this.sepOptions1.Name = "sepOptions1";
@@ -399,13 +411,17 @@ namespace MT3CardTools.Src.Forms
             this.btnCloseAllWindows.Text = "Close all windows";
             this.btnCloseAllWindows.Click += new System.EventHandler(this.btnCloseAllWindows_Click);
             // 
-            // chkHideUnsupportedCarsWarning
+            // sepTools1
             // 
-            this.chkHideUnsupportedCarsWarning.CheckOnClick = true;
-            this.chkHideUnsupportedCarsWarning.Name = "chkHideUnsupportedCarsWarning";
-            this.chkHideUnsupportedCarsWarning.Size = new System.Drawing.Size(258, 22);
-            this.chkHideUnsupportedCarsWarning.Text = "Hide warning for unsupported cars";
-            this.chkHideUnsupportedCarsWarning.Click += new System.EventHandler(this.chkUnsupportedCarsWarning_Click);
+            this.sepTools1.Name = "sepTools1";
+            this.sepTools1.Size = new System.Drawing.Size(199, 6);
+            // 
+            // cardIDChangerToolStripMenuItem
+            // 
+            this.cardIDChangerToolStripMenuItem.Name = "cardIDChangerToolStripMenuItem";
+            this.cardIDChangerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.cardIDChangerToolStripMenuItem.Text = "Card ID changer";
+            this.cardIDChangerToolStripMenuItem.Click += new System.EventHandler(this.cardIDChangerToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -475,5 +491,7 @@ namespace MT3CardTools.Src.Forms
         private System.Windows.Forms.ToolStripMenuItem radSingle;
         private System.Windows.Forms.ToolStripMenuItem chkAddAllFiles;
         private System.Windows.Forms.ToolStripMenuItem chkHideUnsupportedCarsWarning;
+        private System.Windows.Forms.ToolStripSeparator sepTools1;
+        private System.Windows.Forms.ToolStripMenuItem cardIDChangerToolStripMenuItem;
     }
 }

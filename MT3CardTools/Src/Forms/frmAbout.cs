@@ -36,6 +36,10 @@ namespace MT3CardTools.Src.Forms
             var ctrl = new GravityBox(PointToClient(Cursor.Position), new PointF(-1, -3), (float)(Rnd.NextDouble() - 0.5));
             ctrl.SetImage((Bitmap)Properties.Resources.ResourceManager.GetObject("test"));
             Controls.Add(ctrl);
+            //ctrl.SendToBack();
+            //// Needed
+            //lblCredits.SendToBack();
+            //lblStats.SendToBack();
             ctrl.Show();
         }
     }

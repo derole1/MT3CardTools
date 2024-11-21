@@ -124,6 +124,12 @@
     <Compile Include="Src\Forms\frmCardGenerator.Designer.cs">
       <DependentUpon>frmCardGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Src\Forms\frmCardIDChanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Src\Forms\frmCardIDChanger.Designer.cs">
+      <DependentUpon>frmCardIDChanger.cs</DependentUpon>
+    </Compile>
     <Compile Include="Src\Forms\frmCardImageGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Src\Forms\frmCardGenerator.resx">
       <DependentUpon>frmCardGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Src\Forms\frmCardIDChanger.resx">
+      <DependentUpon>frmCardIDChanger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Src\Forms\frmCardImageGenerator.resx">
       <DependentUpon>frmCardImageGenerator.cs</DependentUpon>
