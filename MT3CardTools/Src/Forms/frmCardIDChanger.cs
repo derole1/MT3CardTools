@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MT3CardTools.Src.Interface;
 using MT3CardTools.Src.Helpers;
-using static MT3CardTools.Src.CardTools.Card;
 
 namespace MT3CardTools.Src.Forms
 {
@@ -83,6 +82,8 @@ namespace MT3CardTools.Src.Forms
                 "- Any outstanding revenge ghosts will be lost and will not appear when carding in\r\n" +
                 "- You will no longer see the \"Your Ghost\" marker on any ghosts recorded by this card\r\n" +
                 "\r\n" +
+                "!!! PLEASE NOTE !!! - To prevent abuse of machine leaderboards, time attack records, VS play count/stars and maxi coin will be reset\r\n" +
+                "\r\n" +
                 "If you are happy with this, click yes, if not, please click no and cancel the ID change process", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 using (var dlg = new SaveFileDialog())
@@ -99,6 +100,16 @@ namespace MT3CardTools.Src.Forms
                             case Card.EVersion.v337_JPN_LOC_TEST:
                                 v337Card.Data_1.Id1 = (uint)numNewId1.Value;
                                 v337Card.Data_1.Id2 = (uint)numNewId2.Value;
+                                v337Card.Data_2.JoinPlayCount = 0;
+                                v337Card.Data_2.JoinStarCount = 0;
+                                v337Card.Data_2.Ta.Clear();
+                                for (int i = 0; i < 15; i++)
+                                    v337Card.Data_2.Ta.Add(new Card_v337.Data2.TA
+                                    {
+                                        Car = false,
+                                        Power = 0,
+                                        Time = 0
+                                    });
                                 using (var card = new CardFile(dlg.FileName, BaseCard.BaseCard.Version))
                                 {
                                     card.BaseCard.SetObject(v337Card);
@@ -113,6 +124,16 @@ namespace MT3CardTools.Src.Forms
                             case Card.EVersion.v363_JPN_LOC_TEST_B:
                                 v363Card.Data_1.Id1 = (uint)numNewId1.Value;
                                 v363Card.Data_1.Id2 = (uint)numNewId2.Value;
+                                v363Card.Data_2.JoinPlayCount = 0;
+                                v363Card.Data_2.JoinStarCount = 0;
+                                v363Card.Data_2.MaxiCoin = 0;
+                                v363Card.Data_2.Ta.Clear();
+                                for (int i = 0; i < 15; i++)
+                                    v363Card.Data_2.Ta.Add(new Card_v363.Data2.TA
+                                    {
+                                        Power = 0,
+                                        Time = 0
+                                    });
                                 using (var card = new CardFile(dlg.FileName, BaseCard.BaseCard.Version))
                                 {
                                     card.BaseCard.SetObject(v363Card);
@@ -123,6 +144,16 @@ namespace MT3CardTools.Src.Forms
                             case Card.EVersion.v386_JPN:
                                 v386Card.Data_1.Id1 = (uint)numNewId1.Value;
                                 v386Card.Data_1.Id2 = (uint)numNewId2.Value;
+                                v386Card.Data_2.JoinPlayCount = 0;
+                                v386Card.Data_2.JoinStarCount = 0;
+                                v386Card.Data_2.MaxiCoin = 0;
+                                v386Card.Data_2.Ta.Clear();
+                                for (int i = 0; i < 15; i++)
+                                    v386Card.Data_2.Ta.Add(new Card_v386.Data2.TA
+                                    {
+                                        Power = 0,
+                                        Time = 0
+                                    });
                                 using (var card = new CardFile(dlg.FileName, BaseCard.BaseCard.Version))
                                 {
                                     card.BaseCard.SetObject(v386Card);
