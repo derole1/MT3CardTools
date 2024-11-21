@@ -7,6 +7,7 @@ Provides many functions such as:
   - Card conversion between dump formats
   - Card region swapping
   - Card generation
+  - Card ID renewal (De-links card from data saved on machine)
   - Card read/writing using the original card reader/writer
   
 Special thanks:
