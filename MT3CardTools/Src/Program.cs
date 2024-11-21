@@ -41,7 +41,8 @@ namespace MT3CardTools.Src
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Log.Info($"Main: argc:{args.Length},argv:{string.Join(" ", args)}");
-            if (args.Length < 2 || args[1] == "-log" || args[1] == "-console")
+            // TODO: Improve the below
+            if (args.Length == 2 && (args[1] == "-log" || args[1] == "-console"))
             {
                 if (args[1] == "-log")
                     Log.LogToFile = true;
