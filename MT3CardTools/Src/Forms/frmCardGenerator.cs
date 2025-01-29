@@ -14,6 +14,7 @@ using MT3CardTools.Src.CardTools.Objects;
 using MT3CardTools.Src.CardTools.Data;
 using MT3CardTools.Src.Interface;
 using MT3CardTools.Src.Helpers;
+using MT3CardTools.Src.Logging;
 
 namespace MT3CardTools.Src.Forms
 {
@@ -25,6 +26,8 @@ namespace MT3CardTools.Src.Forms
         }
         
         private bool IsError { get; set; }
+
+        private string _oldName;
 
         private void frmCardGenerator_Load(object sender, EventArgs e)
         {
@@ -156,6 +159,12 @@ namespace MT3CardTools.Src.Forms
                                 //serializer.Data_2.SmoothRough = 3;
                                 serializer.Data_2.Overhaul = (byte)(chkIsPresentOrSpecial.Checked ? 61 : 60);
                                 //serializer.Data_2.Volume = 2;
+                                if (chkVerUp.Checked)
+                                {
+                                    Log.Debug("btnGenerate_Click: Ver Up selected! Attempting to create a version up card");
+                                    serializer.Data_2.Overhaul = 62;
+                                    serializer.Data_2.OdoCount = 2;
+                                }
                                 this.GetValues(serializer.Data_1);
                                 this.GetValues(serializer.Data_2);
                                 cardSerializer = serializer;
@@ -227,6 +236,8 @@ namespace MT3CardTools.Src.Forms
                 case 3:
                     cmbCar.Items.AddRange(Cars_v337.CarTable);
                     chkIsPresentOrSpecial.Text = "Present";
+                    chkVerUp.Visible = false;
+                    chkVerUp.Checked = false;
                     break;
                 case 4:
                 case 5:
@@ -236,14 +247,40 @@ namespace MT3CardTools.Src.Forms
                 case 9:
                     cmbCar.Items.AddRange(Cars_v363.CarTable);
                     chkIsPresentOrSpecial.Text = "Special";
+                    chkVerUp.Visible = true;
                     break;
                 case 10:
                 case 11:
                     cmbCar.Items.AddRange(Cars_v386.CarTable);
                     chkIsPresentOrSpecial.Text = "Special";
+                    chkVerUp.Visible = false;
+                    chkVerUp.Checked = false;
                     break;
                 default:
                     throw new Exception("Invalid version selected!");
+            }
+        }
+
+        private void chkVerUp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkVerUp.Checked)
+            {
+                txtName.Enabled = false;
+
+                numId1.Value = 999999;
+                numId2.Value = 999999;
+                chkIdDevel.Checked = false;
+                _oldName = txtName.Text;
+                txtName.Text = "3DX";
+            }
+            else
+            {
+                numId1.Value = Properties.Settings.Default.CardGenMachineSerial;
+                numId2.Value = Properties.Settings.Default.CardGenCount + 1;
+                chkIdDevel.Checked = false;
+                txtName.Text = _oldName;
+
+                txtName.Enabled = true;
             }
         }
     }

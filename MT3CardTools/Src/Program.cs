@@ -21,8 +21,6 @@ namespace MT3CardTools.Src
         static extern bool AttachConsole(int dwProcessId);
         private const int ATTACH_PARENT_PROCESS = -1;
 
-        const string message = "I like pancakes";
-
         static string[] args = Environment.GetCommandLineArgs();
 
         /// <summary>
@@ -42,12 +40,15 @@ namespace MT3CardTools.Src
             Application.SetCompatibleTextRenderingDefault(false);
             Log.Info($"Main: argc:{args.Length},argv:{string.Join(" ", args)}");
             // TODO: Improve the below
-            if (args.Length == 2 && (args[1] == "-log" || args[1] == "-console"))
+            if (args.Length < 2 || (args.Length == 2 && (args[1] == "-log" || args[1] == "-console")))
             {
-                if (args[1] == "-log")
-                    Log.LogToFile = true;
-                if (args[1] == "-console" && !Debugger.IsAttached)
-                    Log.Warn("Main: -console unimplemented!");  // TODO
+                if (args.Length > 1)
+                {
+                    if (args[1] == "-log")
+                        Log.LogToFile = true;
+                    if (args[1] == "-console" && !Debugger.IsAttached)
+                        Log.Warn("Main: -console unimplemented!");  // TODO
+                }
                 Application.Run(new frmMain());
             }
             else

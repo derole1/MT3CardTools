@@ -127,7 +127,7 @@ namespace MT3CardTools.Src.Forms
                 {
                     Name = $"lblCourse{c}",
                     Font = new Font(FontFamily.GenericMonospace, TENFIGHT_FONT_SIZE),
-                    Text = $"{c}: ",
+                    Text = Properties.Settings.Default.CardEditor_ShowCourseNames ? $"{Courses.CourseTable[c]}: " : $"{c}: ",
                     Location = new Point(x, y),
                     AutoSize = true
                 };
@@ -179,7 +179,7 @@ namespace MT3CardTools.Src.Forms
                 Name = "lstTAResults",
                 Columns =
                 {
-                    new ColumnHeader { Name = "clmTAResultCourse", Text = "Course", Width = 50 },
+                    new ColumnHeader { Name = "clmTAResultCourse", Text = "Course", Width = Properties.Settings.Default.CardEditor_ShowCourseNames ? 150 : 50 },
                     new ColumnHeader { Name = "clmTAResultPower", Text = "Power", Width = 50 },
                     new ColumnHeader { Name = "clmTAResultTime", Text = "Time", Width = 70 }
                 },
@@ -193,7 +193,7 @@ namespace MT3CardTools.Src.Forms
             {
                 lstTAResults.Items.Add(new ListViewItem(new string[]
                 {
-                    i.ToString(),
+                    Properties.Settings.Default.CardEditor_ShowCourseNames ? Courses.CourseTable[i] : i.ToString(),
                     result.Power.ToString(),
                     result.Time.GetTime()
                 }));

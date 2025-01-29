@@ -42,6 +42,7 @@ namespace MT3CardTools.Src.Forms
             this.lblVersion = new System.Windows.Forms.Label();
             this.cmbVersion = new System.Windows.Forms.ComboBox();
             this.chkIsPresentOrSpecial = new System.Windows.Forms.CheckBox();
+            this.chkVerUp = new System.Windows.Forms.CheckBox();
             this.grpId.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numId1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numId2)).BeginInit();
@@ -189,11 +190,23 @@ namespace MT3CardTools.Src.Forms
             this.chkIsPresentOrSpecial.Text = "Present";
             this.chkIsPresentOrSpecial.UseVisualStyleBackColor = true;
             // 
+            // chkVerUp
+            // 
+            this.chkVerUp.AutoSize = true;
+            this.chkVerUp.Location = new System.Drawing.Point(147, 230);
+            this.chkVerUp.Name = "chkVerUp";
+            this.chkVerUp.Size = new System.Drawing.Size(59, 17);
+            this.chkVerUp.TabIndex = 25;
+            this.chkVerUp.Text = "Ver Up";
+            this.chkVerUp.UseVisualStyleBackColor = true;
+            this.chkVerUp.CheckedChanged += new System.EventHandler(this.chkVerUp_CheckedChanged);
+            // 
             // frmCardGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 289);
+            this.Controls.Add(this.chkVerUp);
             this.Controls.Add(this.chkIsPresentOrSpecial);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmbVersion);
@@ -236,5 +249,6 @@ namespace MT3CardTools.Src.Forms
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.ComboBox cmbVersion;
         private System.Windows.Forms.CheckBox chkIsPresentOrSpecial;
+        private System.Windows.Forms.CheckBox chkVerUp;
     }
 }

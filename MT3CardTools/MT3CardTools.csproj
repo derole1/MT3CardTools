@@ -75,6 +75,7 @@
     <Compile Include="Src\CardTools\Data\Cars_v337.cs" />
     <Compile Include="Src\CardTools\Data\Cars_v363.cs" />
     <Compile Include="Src\CardTools\Data\Cars_v386.cs" />
+    <Compile Include="Src\CardTools\Data\Courses.cs" />
     <Compile Include="Src\CardTools\Data\Parts_v337.cs" />
     <Compile Include="Src\CardTools\Data\Parts_v363.cs" />
     <Compile Include="Src\CardTools\Data\Parts_v386.cs" />

@@ -101,6 +101,7 @@ namespace MT3CardTools.Src.Forms
             }
             chkAddAllFiles.Checked = Properties.Settings.Default.CardEditor_AllowAllFiles;
             chkHideUnsupportedCarsWarning.Checked = Properties.Settings.Default.CardEditor_HideUnsupportedCarsWarning;
+            chkShowCourseNames.Checked = Properties.Settings.Default.CardEditor_ShowCourseNames;
 
             if (Properties.Settings.Default.CardGenMachineSerial == 0)
             {
@@ -542,6 +543,12 @@ namespace MT3CardTools.Src.Forms
                     Msg.Error($"Source card version {version} is not valid! Aborting");
                 }
             }
+        }
+
+        private void chkShowCourseNames_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.CardEditor_ShowCourseNames = chkShowCourseNames.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
